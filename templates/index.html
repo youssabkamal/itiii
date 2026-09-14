@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Support AI | RAG Pipeline</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="brand-group">
+                <div class="brand-avatar">AI</div>
+                <div>
+                    <h1>OmniRetail RAG Assistant</h1>
+                    <p class="subtitle">Multi-Stage NLP Pipeline: LangID &bull; Emotion &bull; Intent &bull; Grounded RAG</p>
+                </div>
+            </div>
+            <div class="header-badges">
+                <span class="status-indicator online" id="serverStatus">System Online</span>
+                <span class="pill-badge">v2.0 Production</span>
+            </div>
+        </header>
+
+        <main class="main-layout">
+            <section class="chat-section">
+                <div class="chat-viewport" id="chatContainer">
+                    <div class="message system-msg">
+                        <div class="msg-bubble">
+                            Welcome to the OmniRetail Customer Support Assistant.
+                            You can ask about orders, shipping, refunds, cancellation fees, invoices, or account settings.
+                            Try one of the quick scenarios below or type your own question.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sample-pills-bar">
+                    <span class="sample-label">Quick Prompts:</span>
+                    <button class="sample-btn" data-query="How can I track my shipment status?">Track Order</button>
+                    <button class="sample-btn" data-query="I demand an immediate refund! My order arrived damaged and late!">Frustrated Refund</button>
+                    <button class="sample-btn" data-query="Can I change my delivery address before it ships?">Change Address</button>
+                    <button class="sample-btn" data-query="Bonjour, je voudrais annuler ma commande s'il vous plaît.">French Query</button>
+                    <button class="sample-btn" data-query="Hello there! Hope you are having a great day.">Small Talk</button>
+                </div>
+
+                <form class="chat-input-area" id="chatForm">
+                    <input 
+                        type="text" 
+                        id="userInput" 
+                        placeholder="Type customer message here..." 
+                        autocomplete="off"
+                        required
+                    />
+                    <button type="submit" id="sendBtn">
+                        <span>Send</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </form>
+            </section>
+
+            <aside class="pipeline-aside">
+                <div class="aside-card">
+                    <div class="card-title">Live Pipeline Inspector</div>
+                    <div class="pipeline-flow">
+                        <div class="flow-step" id="stepLang">
+                            <div class="step-num">1</div>
+                            <div class="step-meta">
+                                <span class="step-name">Language Identification</span>
+                                <span class="step-val" id="valLang">Awaiting input...</span>
+                            </div>
+                        </div>
+                        <div class="flow-step" id="stepSentiment">
+                            <div class="step-num">2</div>
+                            <div class="step-meta">
+                                <span class="step-name">Sentiment & Tone</span>
+                                <span class="step-val" id="valSentiment">Awaiting input...</span>
+                            </div>
+                        </div>
+                        <div class="flow-step" id="stepIntent">
+                            <div class="step-num">3</div>
+                            <div class="step-meta">
+                                <span class="step-name">Intent Routing</span>
+                                <span class="step-val" id="valIntent">Awaiting input...</span>
+                            </div>
+                        </div>
+                        <div class="flow-step" id="stepEscalation">
+                            <div class="step-num">4</div>
+                            <div class="step-meta">
+                                <span class="step-name">Escalation Status</span>
+                                <span class="step-val" id="valEscalation">Normal</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="aside-card">
+                    <div class="card-title">Retrieved Knowledge Context</div>
+                    <div class="retrieval-container" id="retrievalContainer">
+                        <div class="empty-state">Retrieved grounding chunks from ChromaDB will display here upon query submission.</div>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
